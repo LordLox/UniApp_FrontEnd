@@ -1,19 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/unicorn_background"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <!-- Image above the login field -->
+    <ImageView
+        android:id="@+id/imageAboveLogin"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/unicorno_prova_prof"
+        android:contentDescription="@string/image_above_login" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Login Form Container -->
+    <LinearLayout
+        android:id="@+id/loginFormContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imageAboveLogin"
+        android:layout_margin="16dp"
+        android:background="@drawable/unicorn_box_background"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Login Title -->
+        <TextView
+            android:id="@+id/loginTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/unicorn_text"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Username Field -->
+        <EditText
+            android:id="@+id/usernameField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username"
+            android:drawableLeft="@drawable/unicorn_username_icon"
+            android:drawablePadding="10dp"
+            android:padding="12dp"
+            android:background="@drawable/unicorn_edit_text_background"
+            android:textColor="@color/unicorn_text"
+            android:textColorHint="@color/unicorn_hint" />
+
+        <!-- Password Field -->
+        <EditText
+            android:id="@+id/passwordField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:drawableLeft="@drawable/unicorn_password_icon"
+            android:drawablePadding="10dp"
+            android:padding="12dp"
+            android:background="@drawable/unicorn_edit_text_background"
+            android:inputType="textPassword"
+            android:textColor="@color/unicorn_text"
+            android:textColorHint="@color/unicorn_hint"
+            android:layout_marginTop="16dp" />
+
+        <!-- Login Button -->
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/unicorn_button"
+            android:text="@string/authenticate"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+    <!-- Image below the password field -->
+    <ImageView
+        android:id="@+id/imageBelowPassword"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@id/loginFormContainer"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/unicorno_prova_stud"
+        android:contentDescription="@string/image_below_password" />
+
+</RelativeLayout>
