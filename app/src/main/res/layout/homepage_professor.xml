@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8E6E7"
+    tools:context=".MainActivity">
+
+    <!-- AppBar with Toolbar -->
+
+    <!-- Unicorn image -->
+
+    <!-- Read QR Code Button -->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/home"
+            android:textColor="#4A4A4A"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/profile_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/images" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/unicorn_image"
+        android:layout_width="157dp"
+        android:layout_height="161dp"
+        android:layout_below="@id/toolbar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="126dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="128dp"
+        android:src="@drawable/unicorno_prova_prof" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/read_qr_code_button"
+        android:layout_width="238dp"
+        android:layout_height="64dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="255dp"
+        android:layout_marginEnd="87dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/read_qr_code"
+        android:textColor="@color/white"
+        android:textSize="23sp" />
+
+    <!-- Create Event Button -->
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/create_event_button"
+        android:layout_width="238dp"
+        android:layout_height="64dp"
+        android:layout_below="@id/read_qr_code_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="87dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/create_event"
+        android:textColor="@color/white"
+        android:textSize="23sp" />
+
+    <!-- Event List Button -->
+
+    <!-- Bottom background image -->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/event_list_button"
+        android:layout_width="121dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/create_event_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="143dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginEnd="145dp"
+        android:background="@drawable/rounded_button_white"
+        android:text="@string/event_list"
+        android:textColor="@color/purple_main"
+        android:textSize="15sp" />
+
+    <ImageView
+        android:id="@+id/background_bottom"
+        android:layout_width="312dp"
+        android:layout_height="265dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="-2dp"
+        android:layout_marginBottom="-3dp"
+        android:alpha="0.7"
+        android:scaleType="fitXY"
+        android:src="@drawable/banners_liquid_shapes_modern_graphic_elements_png" />
+
+</RelativeLayout>

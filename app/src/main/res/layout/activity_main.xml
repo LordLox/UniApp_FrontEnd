@@ -2,20 +2,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/unicorn_background"
+    android:background="@color/background_color"
     tools:context=".MainActivity">
 
     <!-- Image above the login field -->
     <ImageView
         android:id="@+id/imageAboveLogin"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="185dp"
+        android:layout_height="171dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="113dp"
         android:layout_marginTop="40dp"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/unicorno_prova_prof"
-        android:contentDescription="@string/image_above_login" />
+        android:layout_marginEnd="113dp"
+        android:src="@drawable/unicorno_prova_prof" />
 
     <!-- Login Form Container -->
     <LinearLayout
@@ -46,7 +50,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/username"
-            android:drawableLeft="@drawable/unicorn_username_icon"
             android:drawablePadding="10dp"
             android:padding="12dp"
             android:background="@drawable/unicorn_edit_text_background"
@@ -59,7 +62,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
-            android:drawableLeft="@drawable/unicorn_password_icon"
             android:drawablePadding="10dp"
             android:padding="12dp"
             android:background="@drawable/unicorn_edit_text_background"
@@ -74,7 +76,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/unicorn_button"
+            android:backgroundTint="@color/purple_main"
             android:text="@string/authenticate"
             android:textColor="@color/white" />
     </LinearLayout>
@@ -82,12 +84,16 @@
     <!-- Image below the password field -->
     <ImageView
         android:id="@+id/imageBelowPassword"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="185dp"
+        android:layout_height="171dp"
         android:layout_below="@id/loginFormContainer"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="113dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/unicorno_prova_stud"
-        android:contentDescription="@string/image_below_password" />
+        android:layout_marginEnd="113dp"
+        android:layout_marginBottom="44dp"
+        android:src="@drawable/unicorno_prova_stud" />
 
 </RelativeLayout>

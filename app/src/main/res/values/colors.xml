@@ -1,7 +1,10 @@
 <resources>
-    <color name="unicorn_background">#FFE5EC</color>
     <color name="unicorn_text">#3C3C3C</color>
     <color name="unicorn_hint">#A9A9A9</color>
-    <color name="unicorn_button">#FF6B6B</color>
     <color name="white">#FFFFFF</color>
+    <color name="background_color">#F8E6E7</color>
+    <color name="Gray29">#4A4A4A</color>
+    <color name="purple_main">#6A4AB1</color>
+    <color name="black">#000000</color>
 </resources>
+

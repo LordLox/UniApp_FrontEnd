@@ -1,9 +1,17 @@
 <resources>
     <string name="app_name">UniApp</string>
-    <string name="image_above_login">Image above login</string>
     <string name="login">Login</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="authenticate">Authenticate</string>
-    <string name="image_below_password">Image below password</string>
+    <string name="create_event">Create Event</string>
+    <string name="read_qr_code">Read QR Code</string>
+    <string name="event_list">Event List</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="name">Name:</string>
+    <string name="change_password">Change Password</string>
+    <string name="back">Back</string>
+    <string name="giovanni_filiberto">Giovanni Filiberto</string>
+    <string name="ab123cd">AB123CD</string>
 </resources>
