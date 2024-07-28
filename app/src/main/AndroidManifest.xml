@@ -16,7 +16,7 @@
             android:name=".HomepageProfessor"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginScreen"
             android:exported="true"/>
         <activity
             android:name=".ProfileProf"

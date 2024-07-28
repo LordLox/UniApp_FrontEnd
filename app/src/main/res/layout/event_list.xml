@@ -1,11 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".ProfileProf">
+    tools:context=".EventList">
 
-    <!-- Top AppBar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -27,87 +28,70 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/profile"
+            android:text="@string/event_list"
             android:textColor="@color/black"
             android:textSize="20sp" />
     </androidx.appcompat.widget.Toolbar>
 
-    <!-- Center Box -->
-
-    <!-- Change Password Button -->
-
-    <!-- Bottom Image -->
-
-    <LinearLayout
-        android:id="@+id/profile_details_box"
+    <ListView
+        android:id="@+id/eventlist"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="392dp"
         android:layout_below="@+id/toolbar"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="16dp"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="54dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="16dp"
-        android:background="@color/white"
-        android:clipToOutline="true"
-        android:elevation="4dp"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/username"
-            android:textColor="@color/purple_main"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/usernameUser"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/name"
-            android:textColor="@color/purple_main"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/nameuser"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-    </LinearLayout>
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-1dp"
+        android:layout_marginBottom="436dp" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/change_password_button"
-        android:layout_width="275dp"
+        android:id="@+id/update_event"
+        android:layout_width="225dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/profile_details_box"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="12dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="29dp"
-        android:layout_marginEnd="71dp"
+        android:layout_marginEnd="174dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="370dp"
         android:background="@drawable/rounded_button_white"
         android:backgroundTint="@color/white"
-        android:text="@string/change_password"
+        android:text="@string/update_event"
         android:textColor="@color/purple_main"
         android:textSize="18sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/download_event"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="134dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="297dp"
+        android:background="@drawable/rounded_button_white"
+        android:backgroundTint="@color/white"
+        android:text="@string/download_event"
+        android:textColor="@color/purple_main"
+        android:textSize="18sp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_event_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="366dp"
+        android:contentDescription="add_event_button_desc"
+        android:src="@drawable/addimage"
+        app:backgroundTint="@color/purple_main"
+        app:tint="@color/background_color" />
 
     <ImageView
         android:id="@+id/bottom_image"

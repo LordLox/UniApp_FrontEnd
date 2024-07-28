@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".MainActivity">
+    tools:context=".LoginScreen">
 
     <!-- Image above the login field -->
     <ImageView
@@ -78,7 +78,7 @@
             android:layout_marginTop="16dp"
             android:backgroundTint="@color/purple_main"
             android:text="@string/authenticate"
-            android:textColor="@color/white" />
+            android:textColor="@color/white"/>
     </LinearLayout>
 
     <!-- Image below the password field -->

@@ -71,12 +71,27 @@
             android:text="@string/usernameUser"
             android:textColor="@color/black"
             android:textSize="18sp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/name"
+            android:textColor="@color/purple_main"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/nameuser"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/name"
+            android:text="@string/badge"
             android:textColor="@color/purple_main"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -85,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/nameuser"
+            android:text="@string/badgenumber"
             android:textColor="@color/black"
             android:textSize="18sp" />
     </LinearLayout>

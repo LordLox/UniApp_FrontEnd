@@ -12,6 +12,10 @@
     <string name="name">Name:</string>
     <string name="change_password">Change Password</string>
     <string name="back">Back</string>
-    <string name="giovanni_filiberto">Giovanni Filiberto</string>
-    <string name="ab123cd">AB123CD</string>
+    <string name="nameuser">Giovanni Filiberto</string>
+    <string name="usernameUser">AB123CD</string>
+    <string name="badge">Badge</string>
+    <string name="badgenumber">123456</string>
+    <string name="update_event">Update Event</string>
+    <string name="download_event">Download Event</string>
 </resources>
