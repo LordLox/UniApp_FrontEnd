@@ -4,27 +4,23 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
-class HomepageProfessor : AppCompatActivity() {
+class AdminHome : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.homepage_professor)
+        setContentView(R.layout.admin_home)
 
         // Set up the toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         // Set up button click listeners (optional)
-        findViewById<Button>(R.id.read_qr_code_button).setOnClickListener {
+        findViewById<Button>(R.id.create_user).setOnClickListener {
             // Handle Read QR Code button click
         }
 
-        findViewById<Button>(R.id.create_event_button).setOnClickListener {
+        findViewById<Button>(R.id.update_user).setOnClickListener {
             // Handle Create com.example.uniapp.Event button click
-        }
-
-        findViewById<Button>(R.id.event_list_button).setOnClickListener {
-            // Handle com.example.uniapp.Event List button click
         }
     }
 }

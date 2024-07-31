@@ -9,19 +9,21 @@
     tools:context=".LoginScreen">
 
     <!-- Image above the login field -->
+
+    <!-- Login Form Container -->
+
     <ImageView
         android:id="@+id/imageAboveLogin"
-        android:layout_width="185dp"
-        android:layout_height="171dp"
+        android:layout_width="wrap_content"
+        android:layout_height="206dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="113dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="113dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="106dp"
         android:src="@drawable/unicorno_prova_prof" />
 
-    <!-- Login Form Container -->
     <LinearLayout
         android:id="@+id/loginFormContainer"
         android:layout_width="match_parent"
@@ -71,29 +73,31 @@
             android:layout_marginTop="16dp" />
 
         <!-- Login Button -->
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_button"
             android:backgroundTint="@color/purple_main"
             android:text="@string/authenticate"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="16sp" />
     </LinearLayout>
 
     <!-- Image below the password field -->
     <ImageView
         android:id="@+id/imageBelowPassword"
-        android:layout_width="185dp"
-        android:layout_height="171dp"
+        android:layout_width="wrap_content"
+        android:layout_height="201dp"
         android:layout_below="@id/loginFormContainer"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="113dp"
+        android:layout_marginStart="97dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="113dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="102dp"
         android:src="@drawable/unicorno_prova_stud" />
 
 </RelativeLayout>

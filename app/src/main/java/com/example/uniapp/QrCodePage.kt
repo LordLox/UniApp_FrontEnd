@@ -6,7 +6,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.bumptech.glide.Glide
+//import com.bumptech.glide.Glide
 
 
 class QrCodePage {
@@ -27,12 +27,12 @@ class QrCodePage {
             qrCodeImage = findViewById(R.id.qrCodeImage)
 
             // Load the unicorn image
-            val unicornImage: ImageView = findViewById(R.id.unicorn_image_stud)
-            Glide.with(this).load(R.drawable.unicorno_prova_stud).into(unicornImage)
+            //val unicornImage: ImageView = findViewById(R.id.unicorn_image_stud)
+            //Glide.with(this).load(R.drawable.unicorno_prova_stud).into(unicornImage)
 
             // Load the QR code image from server
-            val qrCodeUrl = "https://yourserver.com/qrcode.png"
-            Glide.with(this).load(qrCodeUrl).into(qrCodeImage)
+            //val qrCodeUrl = "https://yourserver.com/qrcode.png"
+            //Glide.with(this).load(qrCodeUrl).into(qrCodeImage)
 
             // Start the countdown timer
             startCountdownTimer()

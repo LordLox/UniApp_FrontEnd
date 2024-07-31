@@ -20,6 +20,9 @@
             android:exported="true"/>
         <activity
             android:name=".ProfileProf"
+            android:exported="true"/>
+        <activity
+            android:name=".Event"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8E6E7"
-    tools:context=".QrCodePage$MainActivity">
+    tools:context=".LoginScreen">
 
     <!-- AppBar with Toolbar -->
 
@@ -37,18 +37,6 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <ProgressBar
-        android:id="@+id/timerProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="361dp"
-        android:layout_height="28dp"
-        android:layout_below="@id/toolbar"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="530dp"
-        android:layout_marginEnd="25dp"
-        android:max="30" />
 
     <ImageView
         android:id="@+id/unicorn_image_stud"
@@ -58,20 +46,20 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="125dp"
-        android:layout_marginTop="106dp"
+        android:layout_marginTop="136dp"
         android:layout_marginEnd="129dp"
-        android:src="@drawable/unicorno_prova_stud" />
+        android:src="@drawable/unicorno_prova_prof" />
 
     <ImageView
         android:id="@+id/qrCodeImage"
-        android:layout_width="287dp"
-        android:layout_height="360dp"
+        android:layout_width="339dp"
+        android:layout_height="442dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="54dp"
-        android:layout_marginBottom="275dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="215dp"
         android:padding="16dp"
-        android:src="@drawable/qrcode_prova" />
+        android:src="@drawable/a_black_image" />
 
     <ImageView
         android:id="@+id/background_bottom"
