@@ -23,9 +23,9 @@
     <string name="user">User</string>
     <string name="create_user">Create User</string>
     <string name="update_user">Update User</string>
-    <string-array name="choices_array">
-        <item>Choice 1</item>
-        <item>Choice 2</item>
-        <item>Choice 3</item>
+    <string-array name="event_categories">
+        <item>Lesson</item>
+        <item>Conferance</item>
+        <item>Lab</item>
     </string-array>
 </resources>

@@ -1,43 +1,113 @@
-// src/main/java/com/example/yourapp/MainActivity.kt
 package com.example.uniapp
 
 import android.os.Bundle
-import android.view.View
-import android.widget.AdapterView
+import android.text.TextUtils
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
+import androidx.appcompat.widget.Toolbar
+import com.example.uniapp.network.EventApiService
+import com.example.uniapp.util.SpinnerUtil
+import org.json.JSONObject
 
 class Event : AppCompatActivity() {
+
+    private lateinit var eventField: EditText
+    private lateinit var spinner: Spinner
+    private lateinit var okButton: AppCompatButton
+    private lateinit var apiService: EventApiService
+    private var isUpdate = false
+    private var eventId = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.event)
 
-        // Get reference to the Spinner
-        val spinner: Spinner = findViewById(R.id.spinner)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.choices_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinner.adapter = adapter
+        eventField = findViewById(R.id.eventField)
+        spinner = findViewById(R.id.spinner)
+        okButton = findViewById(R.id.confirmEvent)
+        apiService = EventApiService(this)
+
+        // Set up the spinner
+        val adapter = ArrayAdapter.createFromResource(this, R.array.event_categories, android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
+
+        // Check if this is an update or a new event
+        val intent = intent
+        if (intent != null && intent.hasExtra("eventId")) {
+            isUpdate = true
+            eventId = intent.getIntExtra("eventId", -1)
+            // Fetch event details and populate fields
+            fetchEventDetails(eventId)
         }
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                val selectedChoice = parent.getItemAtPosition(position).toString()
-                Toast.makeText(this@Event, "Selected: $selectedChoice", Toast.LENGTH_SHORT).show()
+
+        okButton.setOnClickListener {
+            val eventName = eventField.text.toString()
+            val eventCategory = spinner.selectedItem.toString()
+
+            if (TextUtils.isEmpty(eventName)) {
+                Toast.makeText(this, "Please enter the event name", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-                // Another interface callback
+            try {
+                val eventDetails = JSONObject().apply {
+                    put("name", eventName)
+                    put("category", eventCategory)
+                }
+
+                if (isUpdate) {
+                    updateEvent(eventDetails)
+                } else {
+                    createEvent(eventDetails)
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
+    }
+
+    private fun fetchEventDetails(eventId: Int) {
+        apiService.fetchEventDetails(eventId,
+            { response ->
+                val name = response.getString("name")
+                val category = response.getString("category")
+
+                eventField.setText(name)
+                val spinnerPosition = SpinnerUtil.getSpinnerPosition(this, category)
+                spinner.setSelection(spinnerPosition)
+            },
+            { error ->
+                Toast.makeText(this, "Failed to fetch event details", Toast.LENGTH_SHORT).show()
+            })
+    }
+
+    private fun createEvent(eventDetails: JSONObject) {
+        apiService.createEvent(eventDetails,
+            {
+                Toast.makeText(this, "Event created successfully", Toast.LENGTH_SHORT).show()
+                finish()
+            },
+            {
+                Toast.makeText(this, "Failed to create event", Toast.LENGTH_SHORT).show()
+            })
+    }
+
+    private fun updateEvent(eventDetails: JSONObject) {
+        apiService.updateEvent(eventDetails,
+            {
+                Toast.makeText(this, "Event updated successfully", Toast.LENGTH_SHORT).show()
+                finish()
+            },
+            {
+                Toast.makeText(this, "Failed to update event", Toast.LENGTH_SHORT).show()
+            })
     }
 }
