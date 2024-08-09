@@ -28,4 +28,9 @@
         <item>Conferance</item>
         <item>Lab</item>
     </string-array>
+    <string-array name="user_types">
+        <item>Admin</item>
+        <item>Professor</item>
+        <item>Student</item>
+    </string-array>
 </resources>
