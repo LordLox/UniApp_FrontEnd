@@ -8,23 +8,40 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
+import com.example.uniapp.model.UserInfo
+import com.example.uniapp.model.UserType
 import com.example.uniapp.network.LoginApiService
-import com.example.uniapp.util.EncryptionUtils
 import com.example.uniapp.util.FileStorageUtils
 import com.example.uniapp.util.GlobalVariables
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.Response
 
 class LoginActivity : AppCompatActivity() {
 
-    private val apiUrl = "${GlobalVariables.apiCommonUrl}users/userinfo"
-    private val aesKey = "${GlobalVariables.AESKey}" // Replace with your actual key
-    private lateinit var loginApiService: LoginApiService
+    private var loginApiService: LoginApiService = LoginApiService()
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
+        GlobalVariables.applicationPath = this.filesDir
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login_screen)
 
-        loginApiService = LoginApiService(apiUrl)
+        // Go to specific page only if user already logged in
+        if(FileStorageUtils.fileExists(GlobalVariables.userInfoFileName))
+        {
+            getUserInfo { userInfo ->
+                routeToPageBasedOnUser(userInfo)
+            }
+        }
+
+        setContentView(R.layout.login_screen)
 
         val usernameEditText = findViewById<EditText>(R.id.usernameField)
         val passwordEditText = findViewById<EditText>(R.id.passwordField)
@@ -33,35 +50,44 @@ class LoginActivity : AppCompatActivity() {
         loginButton.setOnClickListener {
             val username = usernameEditText.text.toString()
             val password = passwordEditText.text.toString()
-            loginUser(username, password)
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun loginUser(username: String, password: String) {
-        loginApiService.loginUser(username, password) { success, encryptedUserInfo ->
-            if (success && encryptedUserInfo != null) {
-                FileStorageUtils.saveToFile(this, "user_info.txt", encryptedUserInfo)
-                val intent = Intent(this, HomepageProfessor::class.java)
-                startActivity(intent)
-                decryptUserInfo(encryptedUserInfo)
-            } else {
-                runOnUiThread {
-                    Toast.makeText(this, "Login failed", Toast.LENGTH_SHORT).show()
-                }
+            CoroutineScope(Dispatchers.Main).launch {
+                loginUser(username, password)
             }
         }
     }
 
+    // Function to perform the suspend operation and invoke the callback with the result
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun decryptUserInfo(encryptedUserInfo: String) {
-        val decryptedUserInfo = EncryptionUtils.decrypt(encryptedUserInfo, aesKey)
-        runOnUiThread {
-            if (decryptedUserInfo != null) {
-                Toast.makeText(this, "Decrypted User Info: $decryptedUserInfo", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, "Decryption failed", Toast.LENGTH_SHORT).show()
+    private fun getUserInfo(callback: (UserInfo) -> Unit) {
+        lifecycleScope.launch {
+            val encryptedUserInfo = FileStorageUtils.readFromFile(GlobalVariables.userInfoFileName)
+            val result = loginApiService.decryptUserInfo(encryptedUserInfo)
+            callback(result)
+        }
+    }
+
+    private fun routeToPageBasedOnUser(userInfo: UserInfo){
+        val intent = when (userInfo.type) {
+            UserType.Admin -> Intent(this@LoginActivity, AdminHome::class.java)
+            UserType.Professor -> Intent(this@LoginActivity, HomepageProfessor::class.java)
+            UserType.Student -> Intent(this@LoginActivity, QrCodePage::class.java)
+        }
+        startActivity(intent)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private suspend fun loginUser(username: String, password: String) {
+        try {
+            val userInfo = loginApiService.loginUser(username, password)
+            withContext(Dispatchers.Main) {
+                routeToPageBasedOnUser(userInfo)
+            }
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
+
 }

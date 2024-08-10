@@ -1,6 +1,13 @@
 package com.example.uniapp.util
 
-object GlobalVariables {
-    var apiCommonUrl = "https://studentapp.commandware.com/"
-    var AESKey = "qwr{@^h`h&_`50/ja9!'dcmh3!uw<&=?"
+import okhttp3.OkHttpClient
+import java.io.File
+
+class GlobalVariables {
+    companion object {
+        var apiCommonUrl = "https://studentapp.commandware.com"
+        val httpClient = OkHttpClient()
+        lateinit var applicationPath: File
+        var userInfoFileName: String = "user_info"
+    }
 }

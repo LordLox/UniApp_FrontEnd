@@ -1,11 +1,14 @@
 package com.example.uniapp
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.ListView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import org.json.JSONArray
 import org.json.JSONObject
@@ -15,6 +18,7 @@ import java.io.OutputStreamWriter
 import com.example.uniapp.network.EventListApiService
 import com.example.uniapp.network.LoginApiService
 import com.example.uniapp.util.GlobalVariables
+import kotlinx.coroutines.launch
 
 class EventList : AppCompatActivity() {
 
@@ -25,8 +29,9 @@ class EventList : AppCompatActivity() {
     private var selectedEvent: JSONObject? = null
     private lateinit var eventAdapter: EventAdapter // Custom adapter for the ListView
     private lateinit var eventListApiService: EventListApiService
-    private val apiUrl = "${GlobalVariables.apiCommonUrl}events/personal/1"
+    private val apiUrl = "${GlobalVariables.apiCommonUrl}/events/personal/1"
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.event_list)
@@ -69,11 +74,15 @@ class EventList : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun loadEvents() {
+        lifecycleScope.launch {
+            val events = eventListApiService.getEventsFromAPI()
+            eventAdapter = EventAdapter(this@EventList, events)
+            eventListView.adapter = eventAdapter
+        }
         // Make an API call to load events (Assume you have a function to do that)
-        val events = eventListApiService // This should return a JSONArray
-        eventAdapter = EventAdapter(this, events)
-        eventListView.adapter = eventAdapter
+         // This should return a JSONArray
     }
 
     private fun downloadEvent(event: JSONObject) {
