@@ -32,21 +32,9 @@ class QrCodePage : AppCompatActivity() {
         progressBar = findViewById(R.id.timerProgressBar)
         qrCodeImage = findViewById(R.id.qrCodeImage)
 
-
-
         findViewById<ImageView>(R.id.profile_icon).setOnClickListener {
             startActivity(Intent(this@QrCodePage, ProfileStud::class.java))
         }
-
-        // Load the unicorn image
-        //val unicornImage: ImageView = findViewById(R.id.unicorn_image_stud)
-        //Glide.with(this).load(R.drawable.unicorno_prova_stud).into(unicornImage)
-
-        // Load the QR code image from server
-        //val qrCodeUrl = "https://yourserver.com/qrcode.png"
-        //Glide.with(this).load(qrCodeUrl).into(qrCodeImage)
-
-        // Start the countdown timer
 
         CoroutineScope(Dispatchers.Main).launch {
             qrCodeImage.setImageBitmap(QrCodeApiService.generateQrCode())
