@@ -1,7 +1,11 @@
 package com.example.uniapp.util
 
+import android.app.Activity
+import android.content.pm.PackageManager
 import android.os.Build
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.uniapp.model.UserInfo
 import com.example.uniapp.network.LoginApiService
 import okhttp3.OkHttpClient
@@ -21,6 +25,13 @@ class GlobalUtils {
             val encryptedUserInfo = FileStorageUtils.readFromFile(userInfoFileName)
             val result = LoginApiService.decryptUserInfo(encryptedUserInfo)
             callback(result)
+        }
+
+        fun checkCameraPermission(activity: Activity) {
+            if (ContextCompat.checkSelfPermission(activity, android.Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(activity, arrayOf(android.Manifest.permission.CAMERA), 1001)
+            }
         }
     }
 }

@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -28,6 +33,7 @@
         <activity android:name=".QrCodePage"/>
         <activity android:name=".ProfileProf"/>
         <activity android:name=".ProfileStud"/>
+        <activity android:name=".ReadQrPage"/>
     </application>
 
 </manifest>

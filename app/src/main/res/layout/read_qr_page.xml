@@ -45,21 +45,22 @@
         android:layout_below="@id/toolbar"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="125dp"
-        android:layout_marginTop="136dp"
-        android:layout_marginEnd="129dp"
+        android:layout_marginStart="127dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="127dp"
         android:src="@drawable/unicorno_prova_prof" />
 
-    <ImageView
-        android:id="@+id/qrCodeImage"
-        android:layout_width="339dp"
-        android:layout_height="442dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="29dp"
-        android:layout_marginBottom="215dp"
-        android:padding="16dp"
-        android:src="@drawable/a_black_image" />
+    <!-- CameraView for QR Code Reading -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/preview_view"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_below="@id/unicorn_image_stud"
+        android:layout_above="@id/background_bottom"
+        android:layout_marginTop="-6dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="20dp"
+        android:adjustViewBounds="true" />
 
     <ImageView
         android:id="@+id/background_bottom"
