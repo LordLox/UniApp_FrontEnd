@@ -10,14 +10,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
 import com.example.uniapp.network.EventListApiService
-import com.example.uniapp.network.LoginApiService
-import com.example.uniapp.util.GlobalVariables
+import com.example.uniapp.util.GlobalUtils
+import com.example.uniapp.util.NavigationUtils
 import kotlinx.coroutines.launch
 
 class EventList : AppCompatActivity() {
@@ -28,14 +27,13 @@ class EventList : AppCompatActivity() {
     private lateinit var addEventButton: FloatingActionButton
     private var selectedEvent: JSONObject? = null
     private lateinit var eventAdapter: EventAdapter // Custom adapter for the ListView
-    private lateinit var eventListApiService: EventListApiService
-    private val apiUrl = "${GlobalVariables.apiCommonUrl}/events/personal/1"
+    private val apiUrl = "${GlobalUtils.apiCommonUrl}/events/personal/1"
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
+        NavigationUtils.returnToLoginIfNotLogged(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.event_list)
-        eventListApiService = EventListApiService(apiUrl)
 
         eventListView = findViewById(R.id.eventlist)
         updateEventButton = findViewById(R.id.update_event)
@@ -77,7 +75,7 @@ class EventList : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun loadEvents() {
         lifecycleScope.launch {
-            val events = eventListApiService.getEventsFromAPI()
+            val events = EventListApiService.getEventsFromAPI()
             eventAdapter = EventAdapter(this@EventList, events)
             eventListView.adapter = eventAdapter
         }

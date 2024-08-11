@@ -15,36 +15,17 @@
         android:theme="@style/Theme.UniApp"
         tools:targetApi="31">
         <activity
-            android:name=".HomepageProfessor"
-            android:exported="false" />
-        <activity
-            android:name=".LoginActivity"
-            android:exported="true"/>
-        <activity
-            android:name=".ProfileProf"
-            android:exported="true"/>
-        <activity
-            android:name=".Event"
-            android:exported="true"/>
-        <activity
-            android:name=".AdminHome"
-            android:exported="true"/>
-            <activity
-                android:name=".EventList"
-                android:exported="true"/>
-        <activity
-            android:name=".QrCodePage$MainActivity"
-            android:exported="true"/>
-        <activity
-            android:name=".User"
+            android:name=".MainActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".AdminHome"/>
+        <activity android:name=".HomepageProfessor"/>
+        <activity android:name=".QrCodePage"/>
     </application>
 
 </manifest>

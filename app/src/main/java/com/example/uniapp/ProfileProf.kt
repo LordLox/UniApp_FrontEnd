@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import android.widget.Button
 import com.example.uniapp.R
+import com.example.uniapp.util.NavigationUtils
 
 class ProfileProf : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        NavigationUtils.returnToLoginIfNotLogged(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_prof)
 

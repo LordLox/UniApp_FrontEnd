@@ -3,11 +3,13 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.uniapp.util.NavigationUtils
 
 class AdminHome : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        NavigationUtils.returnToLoginIfNotLogged(this)
         setContentView(R.layout.admin_home)
 
         // Set up the toolbar

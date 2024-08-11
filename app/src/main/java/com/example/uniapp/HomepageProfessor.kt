@@ -3,10 +3,12 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.example.uniapp.util.NavigationUtils
 
 class HomepageProfessor : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        NavigationUtils.returnToLoginIfNotLogged(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.homepage_professor)
 

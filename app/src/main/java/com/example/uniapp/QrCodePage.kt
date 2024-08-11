@@ -6,54 +6,50 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-//import com.bumptech.glide.Glide
+import com.example.uniapp.util.NavigationUtils
 
+class QrCodePage : AppCompatActivity() {
 
-class QrCodePage {
+    private lateinit var progressBar: ProgressBar
+    private lateinit var qrCodeImage: ImageView
 
-    class MainActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        NavigationUtils.returnToLoginIfNotLogged(this)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.qr_page)
 
-        private lateinit var progressBar: ProgressBar
-        private lateinit var qrCodeImage: ImageView
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
 
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.qr_page)
+        progressBar = findViewById(R.id.timerProgressBar)
+        qrCodeImage = findViewById(R.id.qrCodeImage)
 
-            val toolbar: Toolbar = findViewById(R.id.toolbar)
-            setSupportActionBar(toolbar)
+        // Load the unicorn image
+        //val unicornImage: ImageView = findViewById(R.id.unicorn_image_stud)
+        //Glide.with(this).load(R.drawable.unicorno_prova_stud).into(unicornImage)
 
-            progressBar = findViewById(R.id.timerProgressBar)
-            qrCodeImage = findViewById(R.id.qrCodeImage)
+        // Load the QR code image from server
+        //val qrCodeUrl = "https://yourserver.com/qrcode.png"
+        //Glide.with(this).load(qrCodeUrl).into(qrCodeImage)
 
-            // Load the unicorn image
-            //val unicornImage: ImageView = findViewById(R.id.unicorn_image_stud)
-            //Glide.with(this).load(R.drawable.unicorno_prova_stud).into(unicornImage)
-
-            // Load the QR code image from server
-            //val qrCodeUrl = "https://yourserver.com/qrcode.png"
-            //Glide.with(this).load(qrCodeUrl).into(qrCodeImage)
-
-            // Start the countdown timer
-            startCountdownTimer()
-        }
-
-        private fun startCountdownTimer() {
-            val timerDuration = 30000L // 30 seconds
-
-            object : CountDownTimer(timerDuration, 1000) {
-                override fun onTick(millisUntilFinished: Long) {
-                    val progress = (millisUntilFinished / 1000).toInt()
-                    progressBar.progress = progress
-                }
-
-                override fun onFinish() {
-                    progressBar.progress = 0
-                    // Optionally, restart the timer or handle completion
-                    startCountdownTimer()
-                }
-            }.start()
-        }
+        // Start the countdown timer
+        startCountdownTimer()
     }
 
+    private fun startCountdownTimer() {
+        val timerDuration = 30000L // 30 seconds
+
+        object : CountDownTimer(timerDuration, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                val progress = (millisUntilFinished / 1000).toInt()
+                progressBar.progress = progress
+            }
+
+            override fun onFinish() {
+                progressBar.progress = 0
+                // Optionally, restart the timer or handle completion
+                startCountdownTimer()
+            }
+        }.start()
+    }
 }

@@ -10,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.Toolbar
 import com.example.uniapp.network.EventApiService
-import com.example.uniapp.util.SpinnerUtil
+import com.example.uniapp.util.NavigationUtils
+import com.example.uniapp.util.SpinnerUtils
 import org.json.JSONObject
 
 class Event : AppCompatActivity() {
@@ -18,11 +19,11 @@ class Event : AppCompatActivity() {
     private lateinit var eventField: EditText
     private lateinit var spinner: Spinner
     private lateinit var okButton: AppCompatButton
-    private lateinit var apiService: EventApiService
     private var isUpdate = false
     private var eventId = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        NavigationUtils.returnToLoginIfNotLogged(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.event)
 
@@ -32,7 +33,6 @@ class Event : AppCompatActivity() {
         eventField = findViewById(R.id.eventField)
         spinner = findViewById(R.id.spinner)
         okButton = findViewById(R.id.confirmEvent)
-        apiService = EventApiService(this)
 
         // Set up the spinner
         val adapter = ArrayAdapter.createFromResource(this, R.array.event_categories, android.R.layout.simple_spinner_item)
@@ -75,13 +75,13 @@ class Event : AppCompatActivity() {
     }
 
     private fun fetchEventDetails(eventId: Int) {
-        apiService.fetchEventDetails(eventId,
+        EventApiService.fetchEventDetails(eventId,
             { response ->
                 val name = response.getString("name")
                 val category = response.getString("category")
 
                 eventField.setText(name)
-                val spinnerPosition = SpinnerUtil.getSpinnerPosition(this, category)
+                val spinnerPosition = SpinnerUtils.getSpinnerPosition(this, category)
                 spinner.setSelection(spinnerPosition)
             },
             { error ->
@@ -90,7 +90,7 @@ class Event : AppCompatActivity() {
     }
 
     private fun createEvent(eventDetails: JSONObject) {
-        apiService.createEvent(eventDetails,
+        EventApiService.createEvent(eventDetails,
             {
                 Toast.makeText(this, "Event created successfully", Toast.LENGTH_SHORT).show()
                 finish()
@@ -101,7 +101,7 @@ class Event : AppCompatActivity() {
     }
 
     private fun updateEvent(eventDetails: JSONObject) {
-        apiService.updateEvent(eventDetails,
+        EventApiService.updateEvent(eventDetails,
             {
                 Toast.makeText(this, "Event updated successfully", Toast.LENGTH_SHORT).show()
                 finish()

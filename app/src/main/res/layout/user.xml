@@ -16,6 +16,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_above="@+id/usernameField"
+        android:layout_marginBottom="102dp"
         android:background="@color/white"
         android:theme="?attr/actionBarTheme">
 
@@ -24,9 +26,9 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="8dp"
             android:background="@drawable/backicon"
-            android:contentDescription="@string/back"
-            android:layout_marginStart="8dp"/>
+            android:contentDescription="@string/back" />
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -38,16 +40,17 @@
             android:textSize="20sp" />
     </androidx.appcompat.widget.Toolbar>
 
+
     <EditText
         android:id="@+id/usernameField"
         android:layout_width="wrap_content"
         android:layout_height="63dp"
+        android:layout_above="@+id/passwordField"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="54dp"
         android:layout_marginEnd="54dp"
-        android:layout_marginBottom="740dp"
+        android:layout_marginBottom="18dp"
         android:background="@drawable/rounded_button_white"
         android:drawablePadding="10dp"
         android:hint="@string/username"
@@ -59,12 +62,12 @@
         android:id="@+id/passwordField"
         android:layout_width="wrap_content"
         android:layout_height="63dp"
+        android:layout_above="@+id/nameField"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="54dp"
         android:layout_marginEnd="54dp"
-        android:layout_marginBottom="651dp"
+        android:layout_marginBottom="17dp"
         android:background="@drawable/rounded_button_white"
         android:drawablePadding="10dp"
         android:hint="@string/password"
@@ -73,32 +76,15 @@
         android:textColorHint="@color/unicorn_hint" />
 
     <EditText
-        android:id="@+id/nameField"
-        android:layout_width="wrap_content"
-        android:layout_height="63dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="54dp"
-        android:layout_marginEnd="54dp"
-        android:layout_marginBottom="564dp"
-        android:background="@drawable/rounded_button_white"
-        android:drawablePadding="10dp"
-        android:hint="Name"
-        android:padding="12dp"
-        android:textColor="@color/unicorn_text"
-        android:textColorHint="@color/unicorn_hint" />
-
-    <EditText
         android:id="@+id/badgeField"
         android:layout_width="wrap_content"
         android:layout_height="63dp"
+        android:layout_above="@+id/spinner"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginStart="54dp"
         android:layout_marginEnd="54dp"
-        android:layout_marginBottom="479dp"
+        android:layout_marginBottom="0dp"
         android:background="@drawable/rounded_button_white"
         android:drawablePadding="10dp"
         android:hint="@string/badge"
@@ -106,31 +92,48 @@
         android:textColor="@color/unicorn_text"
         android:textColorHint="@color/unicorn_hint" />
 
-
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="302dp"
         android:layout_height="63dp"
+        android:layout_above="@+id/appCompatButton"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
         android:layout_gravity="center"
         android:layout_marginStart="54dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="54dp"
-        android:layout_marginBottom="391dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/custon_spinner"
         android:spinnerMode="dropdown" />
 
+    <EditText
+        android:id="@+id/nameField"
+        android:layout_width="wrap_content"
+        android:layout_height="63dp"
+        android:layout_above="@+id/badgeField"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="54dp"
+        android:layout_marginEnd="54dp"
+        android:layout_marginBottom="17dp"
+        android:background="@drawable/rounded_button_white"
+        android:drawablePadding="10dp"
+        android:hint="Name"
+        android:padding="12dp"
+        android:textColor="@color/unicorn_text"
+        android:textColorHint="@color/unicorn_hint" />
+
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/appCompatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="161dp"
+        android:layout_marginStart="162dp"
         android:layout_marginEnd="162dp"
-        android:layout_marginBottom="314dp"
+        android:layout_marginBottom="273dp"
         android:background="@drawable/rounded_button"
         android:text="OK"
         android:textColor="@color/white"
