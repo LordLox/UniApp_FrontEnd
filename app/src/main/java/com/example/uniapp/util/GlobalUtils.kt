@@ -7,7 +7,11 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.uniapp.model.UserInfo
+import com.example.uniapp.model.UserTypeDeserializer
 import com.example.uniapp.network.LoginApiService
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonDeserializer
 import okhttp3.OkHttpClient
 import java.io.File
 

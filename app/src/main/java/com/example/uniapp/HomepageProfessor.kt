@@ -31,7 +31,7 @@ class HomepageProfessor : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.event_list_button).setOnClickListener {
-            // Handle com.example.uniapp.Event List button click
+            startActivity(Intent(this@HomepageProfessor, EventList::class.java))
         }
 
         findViewById<ImageView>(R.id.profile_icon).setOnClickListener {

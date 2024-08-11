@@ -84,7 +84,7 @@ class Event : AppCompatActivity() {
                 val spinnerPosition = SpinnerUtils.getSpinnerPosition(this, category)
                 spinner.setSelection(spinnerPosition)
             },
-            { error ->
+            { _ ->
                 Toast.makeText(this, "Failed to fetch event details", Toast.LENGTH_SHORT).show()
             })
     }

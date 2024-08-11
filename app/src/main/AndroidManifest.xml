@@ -34,6 +34,7 @@
         <activity android:name=".ProfileProf"/>
         <activity android:name=".ProfileStud"/>
         <activity android:name=".ReadQrPage"/>
+        <activity android:name=".EventList"/>
     </application>
 
 </manifest>

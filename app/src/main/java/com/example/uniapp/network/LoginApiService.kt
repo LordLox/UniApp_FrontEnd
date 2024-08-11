@@ -3,7 +3,7 @@ package com.example.uniapp.network
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.uniapp.model.UserInfo
-import com.example.uniapp.model.getGson
+import com.example.uniapp.model.userTypeGson
 import com.example.uniapp.util.FileStorageUtils
 import com.example.uniapp.util.GlobalUtils
 import kotlinx.coroutines.Dispatchers
@@ -76,8 +76,7 @@ object LoginApiService {
         val decryptedUserInfo = response.body?.string() ?: throw Exception("Unable to read userinfo")
 
         response.body?.close()
-        val gson = getGson()
-        val jsonVal = gson.fromJson(decryptedUserInfo, UserInfo::class.java)
+        val jsonVal = userTypeGson().fromJson(decryptedUserInfo, UserInfo::class.java)
         return jsonVal
     }
 }

@@ -5,7 +5,7 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.uniapp.model.BarcodeDataDto
-import com.example.uniapp.model.getGson
+import com.example.uniapp.model.eventTypeGson
 import com.example.uniapp.util.GlobalUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -51,8 +51,7 @@ object QrCodeApiService {
         val decryptedBarcodeData = response.body?.string() ?: throw Exception("Unable to read barcode data")
 
         response.body?.close()
-        val gson = getGson()
-        val jsonVal = gson.fromJson(decryptedBarcodeData, BarcodeDataDto::class.java)
+        val jsonVal = eventTypeGson().fromJson(decryptedBarcodeData, BarcodeDataDto::class.java)
         return jsonVal
     }
 

@@ -44,7 +44,7 @@ class UserTypeDeserializer : JsonDeserializer<UserType> {
 }
 
 // Function to get a Gson instance with the custom deserializer
-fun getGson(): Gson {
+fun userTypeGson(): Gson {
     return GsonBuilder()
         .registerTypeAdapter(UserType::class.java, UserTypeDeserializer())
         .create()
