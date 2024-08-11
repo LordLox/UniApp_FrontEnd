@@ -88,10 +88,11 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="366dp"
-        android:contentDescription="add_event_button_desc"
+        android:contentDescription="@string/add_event_button_desc"
         android:src="@drawable/addimage"
         app:backgroundTint="@color/purple_main"
-        app:tint="@color/background_color" />
+        app:tint="@color/background_color"
+        tools:ignore="RelativeOverlap" />
 
     <ImageView
         android:id="@+id/bottom_image"
