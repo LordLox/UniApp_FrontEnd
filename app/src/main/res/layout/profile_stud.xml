@@ -65,10 +65,10 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/usernameField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/usernameUser"
             android:textColor="@color/black"
             android:textSize="18sp" />
         <TextView
@@ -80,10 +80,10 @@
             android:textSize="18sp"
             android:textStyle="bold" />
         <TextView
+            android:id="@+id/nameField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/nameuser"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -97,10 +97,10 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/badgeField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="@string/badgenumber"
             android:textColor="@color/black"
             android:textSize="18sp" />
     </LinearLayout>
@@ -112,16 +112,29 @@
         android:layout_below="@id/profile_details_box"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="65dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="67dp"
         android:layout_marginTop="29dp"
-        android:layout_marginEnd="71dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="67dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/rounded_button_white"
         android:backgroundTint="@color/white"
         android:text="@string/change_password"
         android:textColor="@color/purple_main"
+        android:textSize="18sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/logout_button"
+        android:layout_width="275dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/change_password_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="67dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/logout"
+        android:textColor="@color/white"
         android:textSize="18sp" />
 
     <ImageView

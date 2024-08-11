@@ -41,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     private suspend fun loginUser(username: String, password: String) {
         try {
-            val userInfo = LoginApiService.loginUser(username, password)
+            GlobalUtils.userInfo = LoginApiService.loginUser(username, password)
             withContext(Dispatchers.Main) {
                 startActivity(Intent(this@LoginActivity, MainActivity::class.java))
             }

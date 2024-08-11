@@ -1,6 +1,8 @@
 package com.example.uniapp
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.uniapp.util.NavigationUtils
@@ -27,6 +29,10 @@ class HomepageProfessor : AppCompatActivity() {
 
         findViewById<Button>(R.id.event_list_button).setOnClickListener {
             // Handle com.example.uniapp.Event List button click
+        }
+
+        findViewById<ImageView>(R.id.profile_icon).setOnClickListener {
+            startActivity(Intent(this@HomepageProfessor, ProfileProf::class.java))
         }
     }
 }

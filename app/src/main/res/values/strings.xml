@@ -23,6 +23,7 @@
     <string name="user">User</string>
     <string name="create_user">Create User</string>
     <string name="update_user">Update User</string>
+    <string name="logout">Logout</string>
     <string-array name="event_categories">
         <item>Lesson</item>
         <item>Conferance</item>

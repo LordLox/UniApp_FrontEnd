@@ -1,6 +1,8 @@
 package com.example.uniapp
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.uniapp.util.NavigationUtils
@@ -23,6 +25,10 @@ class AdminHome : AppCompatActivity() {
 
         findViewById<Button>(R.id.update_user).setOnClickListener {
             // Handle Create com.example.uniapp.Event button click
+        }
+
+        findViewById<ImageView>(R.id.profile_icon).setOnClickListener {
+            startActivity(Intent(this@AdminHome, ProfileProf::class.java))
         }
     }
 }

@@ -21,4 +21,9 @@ object FileStorageUtils {
         val file = File(GlobalUtils.applicationPath, fileName)
         return file.exists()
     }
+
+    fun deleteFile(fileName: String) {
+        val file = File(GlobalUtils.applicationPath, fileName)
+        file.delete()
+    }
 }

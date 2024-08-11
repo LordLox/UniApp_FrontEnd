@@ -39,6 +39,28 @@ object LoginApiService {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
+    suspend fun changePassword(newPassword: String): String {
+        val mediaType = "text/plain".toMediaTypeOrNull()
+        val requestBody = newPassword.toRequestBody(mediaType)
+        val request = Request.Builder()
+            .url("${GlobalUtils.apiCommonUrl}/users/changepass")
+            .addHeader("Authorization", GlobalUtils.userInfo.basicAuth)
+            .addHeader("Content-Type", "text/plain")
+            .post(requestBody)
+            .build()
+
+        val response = withContext(Dispatchers.IO) {
+            GlobalUtils.httpClient.newCall(request).execute()
+        }
+
+        val responseBody = response.body?.string()
+
+        response.body?.close()
+
+        return responseBody ?: ""
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     suspend fun decryptUserInfo(encryptedUserInfo: String): UserInfo {
         val mediaType = "text/plain".toMediaTypeOrNull()
         val requestBody = encryptedUserInfo.toRequestBody(mediaType)
