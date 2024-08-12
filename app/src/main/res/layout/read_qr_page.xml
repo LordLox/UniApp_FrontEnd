@@ -12,29 +12,32 @@
 
     <!-- Read QR Code Button -->
 
+    <!-- Top AppBar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
-        android:elevation="4dp">
+        android:theme="?attr/actionBarTheme">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/backButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="start|center_vertical"
+            android:background="@drawable/backicon"
+            android:contentDescription="@string/back"
+            android:layout_marginStart="8dp"/>
+
 
         <TextView
+            android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="@string/home"
-            android:textColor="#4A4A4A"
+            android:layout_gravity="center"
+            android:text="@string/readqrcodepage"
+            android:textColor="@color/black"
             android:textSize="20sp" />
-
-        <ImageView
-            android:id="@+id/profile_icon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/profile_icon" />
-
     </androidx.appcompat.widget.Toolbar>
 
 
