@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.example.uniapp.util.NavigationUtils
 
-class AdminHome : AppCompatActivity() {
+class AdminHomeActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class AdminHome : AppCompatActivity() {
         }
 
         findViewById<ImageView>(R.id.profile_icon).setOnClickListener {
-            startActivity(Intent(this@AdminHome, ProfileProf::class.java))
+            startActivity(Intent(this@AdminHomeActivity, ProfileProfActivity::class.java))
         }
     }
 }

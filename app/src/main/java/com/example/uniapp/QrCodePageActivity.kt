@@ -15,7 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class QrCodePage : AppCompatActivity() {
+class QrCodePageActivity : AppCompatActivity() {
 
     private lateinit var progressBar: ProgressBar
     private lateinit var qrCodeImage: ImageView
@@ -33,7 +33,7 @@ class QrCodePage : AppCompatActivity() {
         qrCodeImage = findViewById(R.id.qrCodeImage)
 
         findViewById<ImageView>(R.id.profile_icon).setOnClickListener {
-            startActivity(Intent(this@QrCodePage, ProfileStud::class.java))
+            startActivity(Intent(this@QrCodePageActivity, ProfileStudActivity::class.java))
         }
 
         CoroutineScope(Dispatchers.Main).launch {

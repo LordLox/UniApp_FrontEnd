@@ -28,13 +28,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity"/>
-        <activity android:name=".AdminHome"/>
-        <activity android:name=".HomepageProfessor"/>
-        <activity android:name=".QrCodePage"/>
-        <activity android:name=".ProfileProf"/>
-        <activity android:name=".ProfileStud"/>
-        <activity android:name=".ReadQrPage"/>
-        <activity android:name=".EventList"/>
+        <activity android:name=".AdminHomeActivity"/>
+        <activity android:name=".HomepageProfessorActivity"/>
+        <activity android:name=".QrCodePageActivity"/>
+        <activity android:name=".ProfileProfActivity"/>
+        <activity android:name=".ProfileStudActivity"/>
+        <activity android:name=".ReadQrPageActivity"/>
+        <activity android:name=".EventListActivity"/>
+        <activity android:name=".EventActivity"/>
     </application>
 
 </manifest>

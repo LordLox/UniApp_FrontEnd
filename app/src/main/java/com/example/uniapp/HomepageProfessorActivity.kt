@@ -8,7 +8,7 @@ import androidx.appcompat.widget.Toolbar
 import com.example.uniapp.util.GlobalUtils
 import com.example.uniapp.util.NavigationUtils
 
-class HomepageProfessor : AppCompatActivity() {
+class HomepageProfessorActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         NavigationUtils.returnToLoginIfNotLogged(this)
@@ -23,7 +23,7 @@ class HomepageProfessor : AppCompatActivity() {
 
         // Set up button click listeners (optional)
         findViewById<Button>(R.id.read_qr_code_button).setOnClickListener {
-            startActivity(Intent(this@HomepageProfessor, ReadQrPage::class.java))
+            startActivity(Intent(this@HomepageProfessorActivity, ReadQrPageActivity::class.java))
         }
 
         findViewById<Button>(R.id.create_event_button).setOnClickListener {
@@ -31,11 +31,11 @@ class HomepageProfessor : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.event_list_button).setOnClickListener {
-            startActivity(Intent(this@HomepageProfessor, EventList::class.java))
+            startActivity(Intent(this@HomepageProfessorActivity, EventListActivity::class.java))
         }
 
         findViewById<ImageView>(R.id.profile_icon).setOnClickListener {
-            startActivity(Intent(this@HomepageProfessor, ProfileProf::class.java))
+            startActivity(Intent(this@HomepageProfessorActivity, ProfileProfActivity::class.java))
         }
     }
 }

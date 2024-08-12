@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".EventList">
+    tools:context=".EventListActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -42,24 +42,6 @@
         android:layout_marginTop="-1dp"
         android:layout_marginBottom="436dp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/update_event"
-        android:layout_width="225dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="29dp"
-        android:layout_marginEnd="174dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="370dp"
-        android:background="@drawable/rounded_button_white"
-        android:backgroundTint="@color/white"
-        android:text="@string/update_event"
-        android:textColor="@color/purple_main"
-        android:textSize="18sp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/download_event"
@@ -73,7 +55,7 @@
         android:layout_marginTop="29dp"
         android:layout_marginEnd="134dp"
         android:layout_marginRight="16dp"
-        android:layout_marginBottom="297dp"
+        android:layout_marginBottom="337dp"
         android:background="@drawable/rounded_button_white"
         android:backgroundTint="@color/white"
         android:text="@string/download_event"

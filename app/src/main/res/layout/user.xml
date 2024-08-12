@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8E6E7"
-    tools:context=".User">
+    tools:context=".UserActivity">
 
     <!-- AppBar with Toolbar -->
 
@@ -104,7 +104,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="54dp"
         android:layout_marginBottom="40dp"
-        android:background="@drawable/custon_spinner"
+        android:background="@drawable/arrow_spinner"
         android:spinnerMode="dropdown" />
 
     <EditText

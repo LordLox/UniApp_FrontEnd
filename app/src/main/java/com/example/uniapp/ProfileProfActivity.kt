@@ -20,13 +20,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class ProfileStud : AppCompatActivity() {
+class ProfileProfActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         NavigationUtils.returnToLoginIfNotLogged(this)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.profile_stud)
+        setContentView(R.layout.profile_prof)
 
         // Set up the toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
@@ -51,14 +51,11 @@ class ProfileStud : AppCompatActivity() {
         val nameField = findViewById<TextView>(R.id.nameField)
         nameField.text = GlobalUtils.userInfo.name
 
-        val badgeField = findViewById<TextView>(R.id.badgeField)
-        badgeField.text = GlobalUtils.userInfo.badge.toString()
-
         // Handle logout button click
         val logoutButton = findViewById<Button>(R.id.logout_button)
         logoutButton.setOnClickListener {
             FileStorageUtils.deleteFile(GlobalUtils.userInfoFileName)
-            startActivity(Intent(this@ProfileStud, MainActivity::class.java))
+            startActivity(Intent(this@ProfileProfActivity, MainActivity::class.java))
         }
     }
 
@@ -86,7 +83,7 @@ class ProfileStud : AppCompatActivity() {
                             .replace("\\n", "\n")
                         if(changePasswordResponse != ""){
                             // Create the AlertDialog
-                            val responseDialog = AlertDialog.Builder(this@ProfileStud)
+                            val responseDialog = AlertDialog.Builder(this@ProfileProfActivity)
                                 .setTitle("Error: Unable to change password")
                                 .setMessage(changePasswordResponse)
                                 .setNegativeButton("Ok", null)
@@ -96,12 +93,12 @@ class ProfileStud : AppCompatActivity() {
                         else
                         {
                             // Create the AlertDialog
-                            val responseDialog = AlertDialog.Builder(this@ProfileStud)
+                            val responseDialog = AlertDialog.Builder(this@ProfileProfActivity)
                                 .setTitle("Succesfully changed password")
                                 .setMessage("Now you need to login again to continue using the app")
                                 .setPositiveButton("Ok") { _: DialogInterface, _: Int ->
                                     FileStorageUtils.deleteFile(GlobalUtils.userInfoFileName)
-                                    startActivity(Intent(this@ProfileStud, MainActivity::class.java))
+                                    startActivity(Intent(this@ProfileProfActivity, MainActivity::class.java))
                                 }
                                 .create()
                             responseDialog.show()

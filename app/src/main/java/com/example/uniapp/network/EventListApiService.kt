@@ -3,6 +3,7 @@ package com.example.uniapp.network
 import android.os.Build
 import androidx.annotation.RequiresApi
 import com.example.uniapp.model.EventDto
+import com.example.uniapp.model.eventTypeGson
 import com.example.uniapp.model.userTypeGson
 import com.example.uniapp.util.GlobalUtils
 import com.google.gson.reflect.TypeToken
@@ -31,7 +32,7 @@ object EventListApiService {
         response.body?.close()
 
         val eventsListType = object : TypeToken<List<EventDto>>() {}.type
-        val events: List<EventDto> = userTypeGson().fromJson(responseBody, eventsListType)
+        val events: List<EventDto> = eventTypeGson().fromJson(responseBody, eventsListType)
 
         return events
     }

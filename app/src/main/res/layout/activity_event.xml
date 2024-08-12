@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8E6E7"
-    tools:context=".Event">
+    tools:context=".EventActivity">
 
     <!-- AppBar with Toolbar -->
 
@@ -60,32 +60,44 @@
         android:id="@+id/spinner"
         android:layout_width="302dp"
         android:layout_height="63dp"
-        android:layout_above="@+id/confirmEvent"
         android:layout_below="@+id/eventField"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="center"
         android:layout_marginStart="54dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="54dp"
-        android:layout_marginBottom="64dp"
-        android:background="@drawable/custon_spinner"
-        android:entries="@array/event_categories"
+        android:background="@drawable/arrow_spinner"
         android:spinnerMode="dropdown" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/confirmEvent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/spinner"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="162dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="162dp"
+        android:background="@drawable/rounded_button"
+        android:text="@string/ok"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/deleteEvent"
+        android:layout_width="186dp"
+        android:layout_height="53dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="162dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="377dp"
-        android:background="@drawable/rounded_button"
-        android:text="OK"
-        android:textColor="@color/white"
+        android:layout_marginStart="112dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginBottom="289dp"
+        android:background="@drawable/rounded_button_white"
+        android:text="@string/delete_event"
+        android:textColor="@color/purple_main"
         android:textSize="20sp" />
 
     <ImageView

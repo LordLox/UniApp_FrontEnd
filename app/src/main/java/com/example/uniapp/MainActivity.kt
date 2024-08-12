@@ -1,21 +1,15 @@
 package com.example.uniapp
 
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.provider.Settings.Global
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
-import com.example.uniapp.model.UserInfo
 import com.example.uniapp.model.UserType
 import com.example.uniapp.util.FileStorageUtils
 import com.example.uniapp.util.GlobalUtils
 import kotlinx.coroutines.launch
-import java.util.Base64
 
 class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
@@ -41,9 +35,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun routeToPageBasedOnUser(){
         val intent = when (GlobalUtils.userInfo.type) {
-            UserType.Admin -> Intent(this@MainActivity, AdminHome::class.java)
-            UserType.Professor -> Intent(this@MainActivity, HomepageProfessor::class.java)
-            UserType.Student -> Intent(this@MainActivity, QrCodePage::class.java)
+            UserType.Admin -> Intent(this@MainActivity, AdminHomeActivity::class.java)
+            UserType.Professor -> Intent(this@MainActivity, HomepageProfessorActivity::class.java)
+            UserType.Student -> Intent(this@MainActivity, QrCodePageActivity::class.java)
         }
         startActivity(intent)
     }

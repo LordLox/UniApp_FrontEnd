@@ -5,7 +5,6 @@ import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Size
 import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.annotation.RequiresApi
@@ -27,7 +26,7 @@ import kotlinx.coroutines.launch
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
-class ReadQrPage : AppCompatActivity() {
+class ReadQrPageActivity : AppCompatActivity() {
 
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var cameraProvider: ProcessCameraProvider
@@ -96,7 +95,7 @@ class ReadQrPage : AppCompatActivity() {
 
                                                         // Create the AlertDialog
                                                         val qrCodeReadDialog =
-                                                            AlertDialog.Builder(this@ReadQrPage)
+                                                            AlertDialog.Builder(this@ReadQrPageActivity)
                                                                 .setTitle("Presence accepted!")
                                                                 .setMessage("User ${decryptedQrCodeContent.name} has entered the event!")
                                                                 .setPositiveButton("Read Again") { dialog: DialogInterface, _: Int ->
@@ -116,7 +115,7 @@ class ReadQrPage : AppCompatActivity() {
                                                     runOnUiThread {
                                                         // Create the AlertDialog
                                                         val qrCodeReadDialog =
-                                                            AlertDialog.Builder(this@ReadQrPage)
+                                                            AlertDialog.Builder(this@ReadQrPageActivity)
                                                                 .setTitle("Error registering presence")
                                                                 .setMessage("Unable to insert presence, already registered")
                                                                 .setPositiveButton("Read Again") { dialog: DialogInterface, _: Int ->

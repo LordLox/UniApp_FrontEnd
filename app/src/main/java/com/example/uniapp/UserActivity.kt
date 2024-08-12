@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.uniapp.util.NavigationUtils
 
-class User : AppCompatActivity() {
+class UserActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         NavigationUtils.returnToLoginIfNotLogged(this)
@@ -34,7 +34,7 @@ class User : AppCompatActivity() {
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 val selectedChoice = parent.getItemAtPosition(position).toString()
-                Toast.makeText(this@User, "Selected: $selectedChoice", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@UserActivity, "Selected: $selectedChoice", Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {

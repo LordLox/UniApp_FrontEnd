@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F8E6E7"
-    tools:context=".HomepageProfessor">
+    tools:context=".HomepageProfessorActivity">
 
     <!-- AppBar with Toolbar -->
 
