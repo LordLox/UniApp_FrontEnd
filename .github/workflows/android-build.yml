@@ -2,8 +2,8 @@ name: Build and Release APK
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches:
+      - master
 
 jobs:
   build:
@@ -19,6 +19,9 @@ jobs:
       with:
         distribution: 'zulu'
         java-version: '11'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x ./gradlew
 
     - name: Build Android App
       run: ./gradlew assembleRelease
@@ -45,7 +48,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref_name }}
+        tag_name: ${{ github.sha }}
+        release_name: Release ${{ github.sha }}
         draft: false
         prerelease: false
