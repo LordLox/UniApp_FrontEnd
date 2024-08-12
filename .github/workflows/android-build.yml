@@ -42,12 +42,6 @@ jobs:
     - name: Build UniScan Android App
       run: ./gradlew assembleRelease
 
-    - name: List files in the project directory
-      run: ls -R  # Recursively list all files and directories
-
-    - name: List files in the app/build/outputs/apk directory
-      run: ls -R app/build/outputs/apk  # Recursively list all files in the APK output directory
-
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
@@ -63,6 +57,6 @@ jobs:
       uses: actions/upload-release-asset@v1
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: app/build/outputs/apk/release/app-release.apk  # Adjust this path if necessary after checking the output
+        asset_path: app/build/outputs/apk/release/app-release-unsigned.apk
         asset_name: uniscan-release.apk
         asset_content_type: application/vnd.android.package-archive
