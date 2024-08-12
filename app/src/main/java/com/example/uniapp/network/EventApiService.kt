@@ -82,7 +82,7 @@ object EventApiService {
         endTimestamp: Long,
         timezone: String = "Europe/Rome",
         culture: String = "it-IT"
-    ): List<HistoryDto>? {
+    ): String? {
         val request = Request.Builder()
             .url("$eventUrl/entry/history")
             .addHeader("Content-Type", "text/csv")
@@ -95,10 +95,7 @@ object EventApiService {
             .build()
 
         val response = executeRequest(request)
-        return response?.let {
-            val listType = object : TypeToken<List<HistoryDto>>() {}.type
-            gson.fromJson(it, listType)
-        }
+        return response
     }
 
     private suspend fun executeRequest(request: Request): String? {
