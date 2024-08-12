@@ -42,6 +42,13 @@ class EventListActivity : AppCompatActivity() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
+    override fun onRestart() {
+        super.onRestart()
+        loadEvents()
+        setupEventListView()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun loadEvents() {
         lifecycleScope.launch {
             try {
