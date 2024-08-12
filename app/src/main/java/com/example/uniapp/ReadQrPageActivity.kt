@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.example.uniapp.model.BarcodeDataDto
+import com.example.uniapp.model.EventDto
 import com.example.uniapp.network.QrCodeApiService
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -25,12 +26,14 @@ import com.google.mlkit.vision.common.InputImage
 import kotlinx.coroutines.launch
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import kotlin.properties.Delegates
 
 class ReadQrPageActivity : AppCompatActivity() {
 
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var cameraProvider: ProcessCameraProvider
     private lateinit var imageAnalysis: ImageAnalysis
+    private var eventId by Delegates.notNull<Int>()
 
     companion object {
         private const val CAMERA_REQUEST_CODE = 1001
@@ -40,6 +43,13 @@ class ReadQrPageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.read_qr_page)
+
+        // Retrieve the event ID from the Intent (if any)
+        eventId = intent.getIntExtra("EVENT_ID", -1)
+        if (eventId < 0){
+            Toast.makeText(this, "No Event selected, cannot scan QR Code", Toast.LENGTH_LONG).show()
+            finish()
+        }
 
         // Initialize the camera executor
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -182,7 +192,7 @@ class ReadQrPageActivity : AppCompatActivity() {
     private suspend fun handleQrCodeScanned(qrCodeContent: String): BarcodeDataDto {
         // Call the suspend function to decrypt the QR code
         val decryptedContent = QrCodeApiService.decryptQrCode(qrCodeContent)
-        QrCodeApiService.insertPresenceQrCode(qrCodeContent, 3)
+        QrCodeApiService.insertPresenceQrCode(qrCodeContent, eventId)
         return decryptedContent
     }
 

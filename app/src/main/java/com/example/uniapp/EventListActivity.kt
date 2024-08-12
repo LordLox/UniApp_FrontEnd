@@ -76,5 +76,12 @@ class EventListActivity : AppCompatActivity() {
             startActivity(intent)
             true
         }
+        eventListView.setOnItemClickListener { _, _, position, _ ->
+            val selectedEvent = events[position]
+            val intent = Intent(this@EventListActivity, ReadQrPageActivity::class.java).apply {
+                putExtra("EVENT_ID", selectedEvent.id)
+            }
+            startActivity(intent)
+        }
     }
 }
