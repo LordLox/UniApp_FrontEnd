@@ -6,7 +6,7 @@ import com.example.uniapp.LoginActivity
 
 object NavigationUtils {
     fun returnToLoginIfNotLogged(context: Context): Unit {
-        if (!FileStorageUtils.fileExists(GlobalUtils.userInfoFileName)){
+        if (!FileStorageUtils.fileExists(GlobalUtils.applicationPath, GlobalUtils.userInfoFileName)){
             context.startActivity(Intent(context, LoginActivity::class.java))
         }
     }

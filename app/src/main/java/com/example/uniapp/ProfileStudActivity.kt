@@ -57,7 +57,7 @@ class ProfileStudActivity : AppCompatActivity() {
         // Handle logout button click
         val logoutButton = findViewById<Button>(R.id.logout_button)
         logoutButton.setOnClickListener {
-            FileStorageUtils.deleteFile(GlobalUtils.userInfoFileName)
+            FileStorageUtils.deleteFile(GlobalUtils.applicationPath, GlobalUtils.userInfoFileName)
             startActivity(Intent(this@ProfileStudActivity, MainActivity::class.java))
         }
     }
@@ -100,7 +100,7 @@ class ProfileStudActivity : AppCompatActivity() {
                                 .setTitle("Succesfully changed password")
                                 .setMessage("Now you need to login again to continue using the app")
                                 .setPositiveButton("Ok") { _: DialogInterface, _: Int ->
-                                    FileStorageUtils.deleteFile(GlobalUtils.userInfoFileName)
+                                    FileStorageUtils.deleteFile(GlobalUtils.applicationPath, GlobalUtils.userInfoFileName)
                                     startActivity(Intent(this@ProfileStudActivity, MainActivity::class.java))
                                 }
                                 .create()

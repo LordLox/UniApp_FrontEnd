@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         // Go to specific page only if user already logged in
-        if(FileStorageUtils.fileExists(GlobalUtils.userInfoFileName))
+        if(FileStorageUtils.fileExists(GlobalUtils.applicationPath, GlobalUtils.userInfoFileName))
         {
             lifecycleScope.launch {
                 GlobalUtils.getUserInfo { userInfo ->

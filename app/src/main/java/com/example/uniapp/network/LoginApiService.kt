@@ -33,7 +33,7 @@ object LoginApiService {
 
         response.body?.close()
 
-        FileStorageUtils.saveToFile(GlobalUtils.userInfoFileName, encryptedUserInfo)
+        FileStorageUtils.saveToFile(GlobalUtils.applicationPath, GlobalUtils.userInfoFileName, encryptedUserInfo)
 
         return decryptUserInfo(encryptedUserInfo)
     }
