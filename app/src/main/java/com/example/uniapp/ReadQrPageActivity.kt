@@ -1,11 +1,14 @@
 package com.example.uniapp
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.OptIn
 import androidx.annotation.RequiresApi
@@ -77,6 +80,7 @@ class ReadQrPageActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("InflateParams")
     @RequiresApi(Build.VERSION_CODES.O)
     @OptIn(ExperimentalGetImage::class)
     private fun startCamera() {
@@ -121,6 +125,7 @@ class ReadQrPageActivity : AppCompatActivity() {
                                                         val qrCodeReadDialog =
                                                             AlertDialog.Builder(this@ReadQrPageActivity)
                                                                 .setTitle("Presence accepted!")
+                                                                .setView(layoutInflater.inflate(R.layout.popup_qr_code_ok, null))
                                                                 .setMessage("User ${decryptedQrCodeContent.name} has entered the event!")
                                                                 .setPositiveButton("Read Again") { dialog: DialogInterface, _: Int ->
                                                                     // Rebind the imageAnalysis to resume scanning
@@ -142,6 +147,7 @@ class ReadQrPageActivity : AppCompatActivity() {
                                                             AlertDialog.Builder(this@ReadQrPageActivity)
                                                                 .setTitle("Error registering presence")
                                                                 .setMessage("Unable to insert presence, already registered")
+                                                                .setView(layoutInflater.inflate(R.layout.popup_qr_code_no, null))
                                                                 .setPositiveButton("Read Again") { dialog: DialogInterface, _: Int ->
                                                                     // Rebind the imageAnalysis to resume scanning
                                                                     bindAnalysisToCamera()

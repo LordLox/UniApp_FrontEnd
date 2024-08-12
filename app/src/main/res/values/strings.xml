@@ -28,6 +28,7 @@
     <string name="delete_event">Delete event</string>
     <string name="ok">OK</string>
     <string name="readqrcodepage">ReadQRCodePage</string>
+    <string name="unable_to_insert_presence_already_registered">Unable to insert presence, already registered</string>
     <string-array name="event_categories">
         <item>Lesson</item>
         <item>Conferance</item>
