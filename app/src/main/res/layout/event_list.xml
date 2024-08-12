@@ -40,7 +40,7 @@
         android:layout_below="@+id/toolbar"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="-1dp"
-        android:layout_marginBottom="436dp" />
+        android:layout_marginBottom="436dp"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -69,7 +69,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="366dp"
+        android:layout_marginBottom="337dp"
         android:contentDescription="@string/add_event_button_desc"
         android:src="@drawable/addimage"
         app:backgroundTint="@color/purple_main"

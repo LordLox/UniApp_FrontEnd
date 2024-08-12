@@ -5,6 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.lifecycleScope
 import com.example.uniapp.model.UserType
 import com.example.uniapp.util.FileStorageUtils
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         GlobalUtils.applicationPath = this.filesDir
         super.onCreate(savedInstanceState)
 
