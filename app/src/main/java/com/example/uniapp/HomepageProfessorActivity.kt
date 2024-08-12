@@ -22,12 +22,8 @@ class HomepageProfessorActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         // Set up button click listeners (optional)
-        findViewById<Button>(R.id.read_qr_code_button).setOnClickListener {
-            startActivity(Intent(this@HomepageProfessorActivity, ReadQrPageActivity::class.java))
-        }
-
         findViewById<Button>(R.id.create_event_button).setOnClickListener {
-            // Handle Create com.example.uniapp.Event button click
+            startActivity(Intent(this@HomepageProfessorActivity, EventActivity::class.java))
         }
 
         findViewById<Button>(R.id.event_list_button).setOnClickListener {

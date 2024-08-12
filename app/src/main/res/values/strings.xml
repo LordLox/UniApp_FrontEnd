@@ -17,7 +17,7 @@
     <string name="badge">Badge</string>
     <string name="badgenumber">123456</string>
     <string name="update_event">Update Event</string>
-    <string name="download_event">Download Event History</string>
+    <string name="download_event">Download Events History</string>
     <string name="event">Event</string>
     <string name="name_event">Name Event</string>
     <string name="user">User</string>
@@ -27,6 +27,7 @@
     <string name="add_event_button_desc">add_event_button_desc</string>
     <string name="delete_event">Delete event</string>
     <string name="ok">OK</string>
+    <string name="readqrcodepage">ReadQRCodePage</string>
     <string-array name="event_categories">
         <item>Lesson</item>
         <item>Conferance</item>
