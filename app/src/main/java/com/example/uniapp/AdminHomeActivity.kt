@@ -16,6 +16,7 @@ class AdminHomeActivity : AppCompatActivity() {
 
         // Set up the toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
+        toolbar.setTitle("")
         setSupportActionBar(toolbar)
 
         // Set up button click listeners (optional)

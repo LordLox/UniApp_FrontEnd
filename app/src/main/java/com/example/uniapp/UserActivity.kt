@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.example.uniapp.util.NavigationUtils
 
 class UserActivity : AppCompatActivity() {
@@ -16,6 +17,10 @@ class UserActivity : AppCompatActivity() {
         NavigationUtils.returnToLoginIfNotLogged(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.user)
+
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false) // Hide default title
 
         // Get reference to the Spinner
         val spinner: Spinner = findViewById(R.id.spinner)

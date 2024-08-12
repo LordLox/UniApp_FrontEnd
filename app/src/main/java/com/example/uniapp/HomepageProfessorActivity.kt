@@ -17,9 +17,9 @@ class HomepageProfessorActivity : AppCompatActivity() {
 
         GlobalUtils.checkCameraPermission(this)
 
-        // Set up the toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false) // Hide default title
 
         // Set up button click listeners (optional)
         findViewById<Button>(R.id.create_event_button).setOnClickListener {

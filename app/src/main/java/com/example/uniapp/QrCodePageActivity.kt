@@ -28,6 +28,7 @@ class QrCodePageActivity : AppCompatActivity() {
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false) // Hide default title
 
         progressBar = findViewById(R.id.timerProgressBar)
         qrCodeImage = findViewById(R.id.qrCodeImage)
