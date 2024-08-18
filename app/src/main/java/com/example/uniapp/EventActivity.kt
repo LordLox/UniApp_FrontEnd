@@ -57,6 +57,14 @@ class EventActivity : AppCompatActivity() {
             intent.getParcelableExtra("EVENT_DTO")
         }
 
+        val deleteButton = findViewById<Button>(R.id.deleteEvent)
+        if (eventDto != null){
+            deleteButton.visibility = Button.VISIBLE
+        }
+        else{
+            deleteButton.visibility = Button.GONE
+        }
+
         // Populate Spinner with EventType enum values
         populateEventTypeSpinner()
 

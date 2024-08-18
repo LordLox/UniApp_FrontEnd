@@ -97,6 +97,7 @@
         android:layout_marginEnd="112dp"
         android:background="@drawable/rounded_button_white"
         android:text="@string/delete_event"
+        android:visibility="gone"
         android:textColor="@color/purple_main"
         android:textSize="20sp" />
 
