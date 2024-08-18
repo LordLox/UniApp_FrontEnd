@@ -107,7 +107,6 @@ class EventListActivity : AppCompatActivity() {
 
     private fun showDateRangePicker() {
         val constraintsBuilder = CalendarConstraints.Builder()
-            .setValidator(DateValidatorPointForward.now()) // Disallow past dates if needed
 
         val dateRangePicker = MaterialDatePicker.Builder.dateRangePicker()
             .setTitleText("Select Date Range")
