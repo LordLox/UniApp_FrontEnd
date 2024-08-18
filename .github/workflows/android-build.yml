@@ -1,0 +1,62 @@
+name: Build and Release UniScan APK
+
+on:
+  push:
+    branches:
+      - master  # Replace with 'main' if you use the main branch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Delete existing release with the same tag
+      run: |
+        latest_release_id=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          "https://api.github.com/repos/${{ github.repository }}/releases/tags/latest" | jq -r .id)
+        if [ "$latest_release_id" != "null" ]; then
+          curl -s -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/releases/$latest_release_id"
+        fi
+
+    - name: Delete existing latest tag
+      run: |
+        if git rev-parse "latest" >/dev/null 2>&1; then
+          git push origin --delete latest
+          git tag -d latest
+        fi
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'zulu'
+        java-version: '17'
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x ./gradlew
+
+    - name: Build UniScan Android App
+      run: ./gradlew assembleRelease
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: latest
+        release_name: UniScan Release ${{ github.sha }}
+        draft: false
+        prerelease: false
+
+    - name: Upload UniScan APK to Release
+      uses: actions/upload-release-asset@v1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: app/build/outputs/apk/release/app-release-unsigned.apk
+        asset_name: uniscan-release.apk
+        asset_content_type: application/vnd.android.package-archive
