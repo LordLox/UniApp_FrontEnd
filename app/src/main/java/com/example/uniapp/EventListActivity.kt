@@ -105,6 +105,7 @@ class EventListActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun showDateRangePicker() {
         val constraintsBuilder = CalendarConstraints.Builder()
 
