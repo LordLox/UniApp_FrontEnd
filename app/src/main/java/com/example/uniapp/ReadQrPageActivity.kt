@@ -24,7 +24,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import com.example.uniapp.model.BarcodeDataDto
-import com.example.uniapp.model.EventDto
 import com.example.uniapp.network.QrCodeApiService
 import com.google.mlkit.vision.barcode.BarcodeScanning
 import com.google.mlkit.vision.barcode.common.Barcode
@@ -36,78 +35,85 @@ import kotlin.properties.Delegates
 
 class ReadQrPageActivity : AppCompatActivity() {
 
+    // Executor service to handle camera operations on a separate thread
     private lateinit var cameraExecutor: ExecutorService
     private lateinit var cameraProvider: ProcessCameraProvider
     private lateinit var imageAnalysis: ImageAnalysis
-    private var eventId by Delegates.notNull<Int>()
+    private var eventId by Delegates.notNull<Int>() // Event ID to track the specific event
 
     companion object {
-        private const val CAMERA_REQUEST_CODE = 1001
+        private const val CAMERA_REQUEST_CODE = 1001 // Request code for camera permission
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.read_qr_page)
+        setContentView(R.layout.read_qr_page) // Set the layout for this activity
 
         // Set up the toolbar
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false) // Hide default title
+        supportActionBar?.setDisplayShowTitleEnabled(false) // Hide the default title
 
-        // Handle back button click
+        // Handle the back button click to finish the activity
         val backButton = findViewById<AppCompatButton>(R.id.backButton)
         backButton.setOnClickListener {
-            finish() // Finish the activity to go back
+            finish()
         }
 
-        // Retrieve the event ID from the Intent (if any)
+        // Retrieve the event ID from the Intent (if passed) to identify the event
         eventId = intent.getIntExtra("EVENT_ID", -1)
-        if (eventId < 0){
+        if (eventId < 0) {
+            // If no event is selected, display a message and finish the activity
             Toast.makeText(this, "No Event selected, cannot scan QR Code", Toast.LENGTH_LONG).show()
             finish()
         }
 
-        // Initialize the camera executor
+        // Initialize the camera executor for managing camera operations on a separate thread
         cameraExecutor = Executors.newSingleThreadExecutor()
 
-        // Check for camera permission
+        // Check for camera permission; if not granted, request it
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
         } else {
+            // If permission is granted, start the camera
             startCamera()
         }
     }
 
     @SuppressLint("InflateParams")
     @RequiresApi(Build.VERSION_CODES.O)
-    @OptIn(ExperimentalGetImage::class)
+    @OptIn(ExperimentalGetImage::class) // Opt into experimental API for image processing
     private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(this)
 
         cameraProviderFuture.addListener({
             cameraProvider = cameraProviderFuture.get()
 
+            // Setup camera preview
             val preview = Preview.Builder()
                 .build()
                 .also {
                     it.setSurfaceProvider(findViewById<PreviewView>(R.id.preview_view).surfaceProvider)
                 }
 
+            // Setup barcode scanner using ML Kit
             val barcodeScanner = BarcodeScanning.getClient()
 
+            // Setup image analysis to analyze frames from the camera
             imageAnalysis = ImageAnalysis.Builder()
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                 .build()
 
+            // Set an analyzer to process the camera frames
             imageAnalysis.setAnalyzer(cameraExecutor) { imageProxy ->
                 val mediaImage = imageProxy.image
                 if (mediaImage != null) {
-                    val image =
-                        InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
-                    barcodeScanner.process(image)
+                    val image = InputImage.fromMediaImage(mediaImage, imageProxy.imageInfo.rotationDegrees)
+                    barcodeScanner.process(image) // Process the image for barcodes
                         .addOnSuccessListener { barcodes ->
+                            // Iterate over all detected barcodes
                             for (barcode in barcodes) {
                                 when (barcode.valueType) {
                                     Barcode.TYPE_TEXT -> {
@@ -117,18 +123,17 @@ class ReadQrPageActivity : AppCompatActivity() {
                                             cameraProvider.unbind(imageAnalysis)
                                             lifecycleScope.launch {
                                                 try {
-                                                    val decryptedQrCodeContent =
-                                                        handleQrCodeScanned(qrCodeContent)
+                                                    // Handle the scanned QR code
+                                                    val decryptedQrCodeContent = handleQrCodeScanned(qrCodeContent)
                                                     runOnUiThread {
-
-                                                        // Create the AlertDialog
+                                                        // Show a dialog indicating the presence was accepted
                                                         val qrCodeReadDialog =
                                                             AlertDialog.Builder(this@ReadQrPageActivity)
                                                                 .setTitle("Presence accepted!")
                                                                 .setView(layoutInflater.inflate(R.layout.popup_qr_code_ok, null))
                                                                 .setMessage("User ${decryptedQrCodeContent.name} has entered the event!")
                                                                 .setPositiveButton("Read Again") { dialog: DialogInterface, _: Int ->
-                                                                    // Rebind the imageAnalysis to resume scanning
+                                                                    // Resume scanning by rebinding imageAnalysis
                                                                     bindAnalysisToCamera()
                                                                     dialog.dismiss()
                                                                 }
@@ -142,14 +147,14 @@ class ReadQrPageActivity : AppCompatActivity() {
                                                     }
                                                 } catch (e: Exception) {
                                                     runOnUiThread {
-                                                        // Create the AlertDialog
+                                                        // Show a dialog indicating an error during the presence registration
                                                         val qrCodeReadDialog =
                                                             AlertDialog.Builder(this@ReadQrPageActivity)
                                                                 .setTitle("Error registering presence")
                                                                 .setMessage("Unable to insert presence, already registered")
                                                                 .setView(layoutInflater.inflate(R.layout.popup_qr_code_no, null))
                                                                 .setPositiveButton("Read Again") { dialog: DialogInterface, _: Int ->
-                                                                    // Rebind the imageAnalysis to resume scanning
+                                                                    // Resume scanning by rebinding imageAnalysis
                                                                     bindAnalysisToCamera()
                                                                     dialog.dismiss()
                                                                 }
@@ -164,6 +169,7 @@ class ReadQrPageActivity : AppCompatActivity() {
                                                 }
                                             }
                                         } else {
+                                            // If QR code content is null, show a toast and finish the activity
                                             runOnUiThread {
                                                 Toast.makeText(this, "Unable to read QR Code", Toast.LENGTH_SHORT).show()
                                             }
@@ -176,10 +182,11 @@ class ReadQrPageActivity : AppCompatActivity() {
                             }
                         }
                         .addOnFailureListener {
-                            // Handle any errors
+                            // Handle any errors in barcode scanning
                             imageProxy.close()
                         }
                         .addOnCompleteListener {
+                            // Always close the imageProxy to free resources
                             imageProxy.close()
                         }
                 }
@@ -188,29 +195,31 @@ class ReadQrPageActivity : AppCompatActivity() {
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
 
             try {
+                // Bind camera preview and image analysis to the camera lifecycle
                 cameraProvider.unbindAll()
                 cameraProvider.bindToLifecycle(
                     this as LifecycleOwner, cameraSelector, preview, imageAnalysis)
-            } catch(exc: Exception) {
-                // Handle exception
+            } catch (exc: Exception) {
+                // Handle any errors during camera setup
             }
 
         }, ContextCompat.getMainExecutor(this))
     }
 
+    // Helper function to rebind image analysis to the camera
     private fun bindAnalysisToCamera() {
         try {
             val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
             cameraProvider.bindToLifecycle(
                 this as LifecycleOwner, cameraSelector, imageAnalysis)
         } catch (exc: Exception) {
-            // Handle exception
+            // Handle any errors during rebinding
         }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private suspend fun handleQrCodeScanned(qrCodeContent: String): BarcodeDataDto {
-        // Call the suspend function to decrypt the QR code
+        // Decrypt the QR code content and register the presence for the event
         val decryptedContent = QrCodeApiService.decryptQrCode(qrCodeContent)
         QrCodeApiService.insertPresenceQrCode(qrCodeContent, eventId)
         return decryptedContent
@@ -224,9 +233,11 @@ class ReadQrPageActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == CAMERA_REQUEST_CODE) {
+            // If permission granted, start the camera
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startCamera()
             } else {
+                // If permission denied, show a toast and finish the activity
                 Toast.makeText(this, "Camera permission is required to scan QR codes.", Toast.LENGTH_LONG).show()
                 finish()
             }
@@ -235,6 +246,7 @@ class ReadQrPageActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        // Shutdown the camera executor when the activity is destroyed
         cameraExecutor.shutdown()
     }
 }

@@ -14,22 +14,17 @@ class AdminHomeActivity : AppCompatActivity() {
         NavigationUtils.returnToLoginIfNotLogged(this)
         setContentView(R.layout.admin_home)
 
-        // Set up the toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         toolbar.setTitle("")
         setSupportActionBar(toolbar)
 
-        // Set up button click listeners (optional)
         findViewById<Button>(R.id.create_user).setOnClickListener {
-            // Handle Read QR Code button click
         }
 
         findViewById<Button>(R.id.update_user).setOnClickListener {
-            // Handle Create com.example.uniapp.Event button click
         }
 
         findViewById<ImageView>(R.id.profile_icon).setOnClickListener {
-            startActivity(Intent(this@AdminHomeActivity, ProfileProfActivity::class.java))
         }
     }
 }

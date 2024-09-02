@@ -6,13 +6,6 @@
     android:background="#F8E6E7"
     tools:context=".ReadQrPageActivity">
 
-    <!-- AppBar with Toolbar -->
-
-    <!-- Unicorn image -->
-
-    <!-- Read QR Code Button -->
-
-    <!-- Top AppBar -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -53,7 +46,6 @@
         android:layout_marginEnd="127dp"
         android:src="@drawable/unicorno_prova_prof" />
 
-    <!-- CameraView for QR Code Reading -->
     <androidx.camera.view.PreviewView
         android:id="@+id/preview_view"
         android:layout_width="match_parent"

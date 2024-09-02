@@ -18,7 +18,6 @@ class GlobalUtils {
         lateinit var applicationPath: File
         var userInfoFileName: String = "user_info"
         lateinit var userInfo: UserInfo
-        lateinit var basicAuth: String
 
         @RequiresApi(Build.VERSION_CODES.O)
         suspend fun getUserInfo(callback: (UserInfo) -> Unit) {

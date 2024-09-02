@@ -24,35 +24,41 @@ class ProfileProfActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Redirect to the login screen if the user is not logged in
         NavigationUtils.returnToLoginIfNotLogged(this)
+
+        // Call the superclass's onCreate method to perform standard initialization
         super.onCreate(savedInstanceState)
         setContentView(R.layout.profile_prof)
 
+        // Set up the toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayShowTitleEnabled(false) // Hide default title
+        supportActionBar?.setDisplayShowTitleEnabled(false) // Hide the default title
 
-        // Handle back button click
+        // Handle the back button click to finish the activity and return to the previous screen
         val backButton = findViewById<Button>(R.id.backButton)
         backButton.setOnClickListener {
             finish() // Finish the activity to go back
         }
 
-        // Handle change password button click
+        // Handle the change password button click
         val changePasswordButton = findViewById<Button>(R.id.change_password_button)
         changePasswordButton.setOnClickListener {
-            showChangePasswordDialog()
+            showChangePasswordDialog() // Show the dialog to change the password
         }
 
+        // Display the user's username and name in the respective fields
         val usernameField = findViewById<TextView>(R.id.usernameField)
         usernameField.text = GlobalUtils.userInfo.username
 
         val nameField = findViewById<TextView>(R.id.nameField)
         nameField.text = GlobalUtils.userInfo.name
 
-        // Handle logout button click
+        // Handle the logout button click
         val logoutButton = findViewById<Button>(R.id.logout_button)
         logoutButton.setOnClickListener {
+            // Delete the user info file and navigate to the main activity (which checks login status)
             FileStorageUtils.deleteFile(GlobalUtils.applicationPath, GlobalUtils.userInfoFileName)
             startActivity(Intent(this@ProfileProfActivity, MainActivity::class.java))
         }
@@ -63,39 +69,40 @@ class ProfileProfActivity : AppCompatActivity() {
         // Create an EditText for password input
         val passwordInput = EditText(this).apply {
             hint = "Enter new password"
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD // Set input type to password
         }
 
         var changePasswordResponse: String?
 
-        // Create the AlertDialog
+        // Create the AlertDialog for changing the password
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Change Password")
-            .setMessage("Please enter your new password")
-            .setView(passwordInput)
+            .setTitle("Change Password") // Title of the dialog
+            .setMessage("Please enter your new password") // Message in the dialog
+            .setView(passwordInput) // Set the password input field in the dialog
             .setPositiveButton("OK") { _: DialogInterface, _: Int ->
                 val newPassword = passwordInput.text.toString()
                 if (newPassword.isNotEmpty()) {
+                    // Launch a coroutine to change the password asynchronously
                     CoroutineScope(Dispatchers.Main).launch {
                         changePasswordResponse = LoginApiService.changePassword(newPassword)
-                            .replace("\"", "")
-                            .replace("\\n", "\n")
-                        if(changePasswordResponse != ""){
-                            // Create the AlertDialog
+                            .replace("\"", "") // Remove extra quotes from the response
+                            .replace("\\n", "\n") // Format the newline characters
+
+                        if (changePasswordResponse != "") {
+                            // Show an error dialog if the password change failed
                             val responseDialog = AlertDialog.Builder(this@ProfileProfActivity)
                                 .setTitle("Error: Unable to change password")
                                 .setMessage(changePasswordResponse)
                                 .setNegativeButton("Ok", null)
                                 .create()
                             responseDialog.show()
-                        }
-                        else
-                        {
-                            // Create the AlertDialog
+                        } else {
+                            // Show a success dialog if the password change was successful
                             val responseDialog = AlertDialog.Builder(this@ProfileProfActivity)
-                                .setTitle("Succesfully changed password")
-                                .setMessage("Now you need to login again to continue using the app")
+                                .setTitle("Successfully changed password")
+                                .setMessage("Now you need to log in again to continue using the app")
                                 .setPositiveButton("Ok") { _: DialogInterface, _: Int ->
+                                    // Delete the user info file and navigate to the main activity to re-login
                                     FileStorageUtils.deleteFile(GlobalUtils.applicationPath, GlobalUtils.userInfoFileName)
                                     startActivity(Intent(this@ProfileProfActivity, MainActivity::class.java))
                                 }
@@ -105,10 +112,10 @@ class ProfileProfActivity : AppCompatActivity() {
                     }
                 }
             }
-            .setNegativeButton("Cancel", null)
+            .setNegativeButton("Cancel", null) // Set a Cancel button to dismiss the dialog
             .create()
 
-        // Show the dialog
+        // Show the change password dialog
         dialog.show()
     }
 }

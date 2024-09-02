@@ -6,12 +6,6 @@
     android:background="#F8E6E7"
     tools:context=".HomepageProfessorActivity">
 
-    <!-- AppBar with Toolbar -->
-
-    <!-- Unicorn image -->
-
-    <!-- Read QR Code Button -->
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -36,12 +30,6 @@
             android:src="@drawable/profile_icon" />
 
     </androidx.appcompat.widget.Toolbar>
-
-    <!-- Create com.example.uniapp.Event Button -->
-
-    <!-- com.example.uniapp.Event List Button -->
-
-    <!-- Bottom background image -->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/event_list_button"

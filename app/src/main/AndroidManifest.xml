@@ -37,6 +37,7 @@
         <activity android:name=".ReadQrPageActivity"/>
         <activity android:name=".EventListActivity"/>
         <activity android:name=".EventActivity"/>
+
     </application>
 
 </manifest>

@@ -6,12 +6,6 @@
     android:background="#F8E6E7"
     tools:context=".EventActivity">
 
-    <!-- AppBar with Toolbar -->
-
-    <!-- Unicorn image -->
-
-    <!-- Read QR Code Button -->
-
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
