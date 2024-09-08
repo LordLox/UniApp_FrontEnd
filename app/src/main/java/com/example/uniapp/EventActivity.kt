@@ -118,16 +118,22 @@ class EventActivity : AppCompatActivity() {
                         type = eventType,
                         id = 0 // id = 0 is ignored by the server and will be replaced with a generated ID
                     )
-                    val newEventId = withContext(Dispatchers.IO) {
-                        EventApiService.createEvent(newEvent) // Call the API to create the event
-                    }
-                    newEventId?.let {
-                        Toast.makeText(this@EventActivity, "Event created successfully", Toast.LENGTH_SHORT).show()
-                        newEvent.id = it // Update the event ID with the newly generated ID
-                        eventDto = newEvent // Set the eventDto to the newly created event
-                        finish() // Close the activity after successful creation
-                    } ?: run {
-                        Toast.makeText(this@EventActivity, "Failed to create event", Toast.LENGTH_SHORT).show()
+                    withContext(Dispatchers.IO) {
+                        try {
+                            val newEventId = EventApiService.createEvent(newEvent) // Call the API to create the event
+                            runOnUiThread {
+                                Toast.makeText(this@EventActivity, "Event created successfully", Toast.LENGTH_SHORT).show()
+                            }
+                            if (newEventId != null) {
+                                newEvent.id = newEventId
+                            } // Update the event ID with the newly generated ID
+                            eventDto = newEvent // Set the eventDto to the newly created event
+                            finish() // Close the activity after successful creation
+                        } catch (e: Exception) {
+                            runOnUiThread {
+                                Toast.makeText(this@EventActivity, "Failed to create event", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                     }
                 } else {
                     // Update the existing event if eventDto is not null
