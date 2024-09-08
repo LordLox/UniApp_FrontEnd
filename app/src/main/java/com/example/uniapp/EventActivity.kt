@@ -137,6 +137,7 @@ class EventActivity : AppCompatActivity() {
                             EventApiService.updateEvent(updatedEvent) // Call the API to update the event
                             runOnUiThread {
                                 Toast.makeText(this@EventActivity, "Event updated successfully", Toast.LENGTH_SHORT).show()
+                                finish() // Close the activity after successful deletion
                             }
                         } catch (e: Exception) {
                             runOnUiThread {
