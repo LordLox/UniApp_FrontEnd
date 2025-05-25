@@ -2,9 +2,8 @@ name: Android Release CI
 
 on:
   push:
-    branches:
-      - master # Trigger on pushes to the master branch
-  workflow_dispatch: # Allows manual triggering from the Actions tab
+    tags:
+      - "v*.*.*" # Triggers on tags like v1.0.0
 
 jobs:
   build-and-release:
