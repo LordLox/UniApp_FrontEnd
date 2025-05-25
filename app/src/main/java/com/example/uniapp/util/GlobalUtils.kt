@@ -13,7 +13,7 @@ import java.io.File
 
 class GlobalUtils {
     companion object {
-        var apiCommonUrl = "https://backend.uniscanapp.it"
+        var apiCommonUrl = "https://uniscan.commandware.com/api"
         val httpClient = OkHttpClient()
         lateinit var applicationPath: File
         var userInfoFileName: String = "user_info"
