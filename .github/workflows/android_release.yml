@@ -26,16 +26,30 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      # Decode Keystore and Place it
+      # Decode Keystore and Place it in the app directory at the root of the workspace
       - name: Decode Keystore
         env:
           SIGNING_KEYSTORE_BASE64: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
         run: |
-          echo $SIGNING_KEYSTORE_BASE64 | base64 --decode > ${{ github.workspace }}/UniApp_FrontEnd/app/release-keystore.jks
+          echo "GitHub Workspace: ${{ github.workspace }}"
+          # Ensure the 'app' directory exists at the root of the workspace
+          mkdir -p ${{ github.workspace }}/app
+          echo "Attempting to write keystore to: ${{ github.workspace }}/app/release-keystore.jks"
+          echo $SIGNING_KEYSTORE_BASE64 | base64 --decode > ${{ github.workspace }}/app/release-keystore.jks
+          # Verify file creation and list contents for debugging
+          if [ -f "${{ github.workspace }}/app/release-keystore.jks" ]; then
+            echo "Keystore file created successfully."
+            ls -l ${{ github.workspace }}/app/
+          else
+            echo "Keystore file NOT created. Check permissions or path."
+            # List workspace root to see structure
+            ls -la ${{ github.workspace }}
+            exit 1
+          fi
 
       - name: Grant execute permission for gradlew
-        run: chmod +x ./UniApp_FrontEnd/gradlew
-        working-directory: ./UniApp_FrontEnd # Assuming gradlew is in UniApp_FrontEnd
+        # Assumes gradlew is at the root of the repository (i.e., directly in ${{ github.workspace }})
+        run: chmod +x ./gradlew
 
       - name: Build with Gradle
         env:
@@ -43,33 +57,33 @@ jobs:
           SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
           SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
         run: |
+          # Assumes gradlew is at the root. The :app:assembleRelease targets the 'app' module.
+          # The keystore path is now relative to the workspace root.
           ./gradlew :app:assembleRelease \
-            -Pandroid.injected.signing.store.file=${{ github.workspace }}/UniApp_FrontEnd/app/release-keystore.jks \
+            -Pandroid.injected.signing.store.file=${{ github.workspace }}/app/release-keystore.jks \
             -Pandroid.injected.signing.store.password=$SIGNING_KEYSTORE_PASSWORD \
             -Pandroid.injected.signing.key.alias=$SIGNING_KEY_ALIAS \
             -Pandroid.injected.signing.key.password=$SIGNING_KEY_PASSWORD
-        working-directory: ./UniApp_FrontEnd
+        # working-directory: . # Or omit, defaults to ${{ github.workspace }}
 
-      - name: Sign APK (Alternative if not done via Gradle properties)
-        id: sign_apk
-        uses: r0adkll/sign-android-release@v1
-        with:
-          releaseDir: UniApp_FrontEnd/app/build/outputs/apk/release
-          signingKeyBase64: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
-          alias: ${{ secrets.SIGNING_KEY_ALIAS }}
-          keyStorePassword: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
-          keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
-        # This step assumes your unsigned APK is named app-release-unsigned.apk
-        # and it will output a signed APK, typically named app-release-signed.apk
-        # or similar depending on the action's behavior.
-        # Adjust if your Gradle build already produces a signed APK directly.
+      # This alternative signing step might not be needed if Gradle handles signing.
+      # If used, ensure paths are correct.
+      # - name: Sign APK (Alternative if not done via Gradle properties)
+      #   id: sign_apk
+      #   uses: r0adkll/sign-android-release@v1
+      #   with:
+      #     releaseDir: app/build/outputs/apk/release # Path relative to workspace root
+      #     signingKeyBase64: ${{ secrets.SIGNING_KEYSTORE_BASE64 }}
+      #     alias: ${{ secrets.SIGNING_KEY_ALIAS }}
+      #     keyStorePassword: ${{ secrets.SIGNING_KEYSTORE_PASSWORD }}
+      #     keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
 
       - name: Create Release and Upload APK
         uses: softprops/action-gh-release@v2
         with:
-          files: UniApp_FrontEnd/app/build/outputs/apk/release/*-signed.apk # Or the exact path to your signed APK
-          # If signing is done directly in the assembleRelease step, the path might be:
-          # files: UniApp_FrontEnd/app/build/outputs/apk/release/app-release.apk
+          # Path to the signed APK, relative to the workspace root
+          files: app/build/outputs/apk/release/*-release.apk # Common naming for signed release APKs
+          # Or: app/build/outputs/apk/release/app-release-signed.apk if using the alternative signing step
           tag_name: ${{ github.ref_name }}
           name: Release ${{ github.ref_name }}
           body: "Automated release for version ${{ github.ref_name }}"
